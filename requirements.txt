@@ -1,4 +1,4 @@
-beautifulsoup4==4.4.1
+flask
 Brlapi==0.6.4
 chardet==2.3.0
 command-not-found==0.3
