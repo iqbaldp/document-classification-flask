@@ -7,6 +7,8 @@ import random
 from nltk import tokenize
 from stopword_list import stopword_list
 
+nltk.download('punkt')
+
 app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
