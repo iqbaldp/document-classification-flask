@@ -6,6 +6,7 @@ import pickle
 import random
 from nltk import tokenize
 from stopword_list import stopword_list
+from collections import Counter
 
 nltk.download('punkt')
 
@@ -27,6 +28,7 @@ def process_api():
 
 
 def classify(document):
+    count = Counter()
     features = []
 
     # Load Model Train
@@ -36,11 +38,12 @@ def classify(document):
     document = document.lower()
     document = re.sub(r'([^a-zA-Z ]+?)', ' ', document)
 
-    for stop in stopword_list:
-            if stop in document:
-                document = document.replace(stop, '')
-
     document = nltk.word_tokenize(document)
+
+    document = [x for x in document if x not in stopword_list]
+
+    for word in document:
+        count[word] += 1
     
     anak_val   = math.log(1/3)
     remaja_val = math.log(1/3)
@@ -68,13 +71,13 @@ def classify(document):
                     dewasa_val += features['smoothDewasaFeatures']
 
     if anak_val > remaja_val and anak_val > dewasa_val:
-        return ('anak', anak_val)
+        return ('anak', anak_val, count)
     elif remaja_val > anak_val and remaja_val > dewasa_val:
-        return ('remaja', remaja_val)
+        return ('remaja', remaja_val, count)
     elif dewasa_val > anak_val and dewasa_val > remaja_val:
-        return ('dewasa', dewasa_val)
+        return ('dewasa', dewasa_val, count)
     else:
-        return ('gatauw', anak_val)
+        return ('Tidak diketahui', anak_val)
 
 if __name__ == '__main__':
     app.run()

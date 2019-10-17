@@ -1,144 +1,238 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-<title>Klasifikasi Artikel</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slick.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Klasifikasi Artikel</title>
+    <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Klasifikasi Artikel">
+    <meta name="keywords" content="Klasifikasi Artikel berdasarkan tingkatan usia">
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900%7COpen+Sans:400" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}"> <!-- Resource style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/ionicons.min.css') }}"> <!-- Resource style -->
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 
-<body>
-<div id="header-holder">
-    <div class="bottom-gradiant"></div>
-    <nav id="main-nav" class="navbar navbar-default navbar-full">
-        <div class="container-fluid">
-            <div class="container container-nav">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="navbar-header">
-                            <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a href="index.html">
-                                <img class="logo" src="{{ url_for('static', filename='images/logo.svg') }}" alt="Spacehost">
-                            </a>
-                        </div>
-                        <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse" id="bs">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#features"><span>Train</span></a></li>
-                                <li><a href="#pricing"><span>About</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <style type="text/css">
+      .form-rounded {
+        border-radius: 1rem;
+        }
+    </style>
+
+  </head>
+  <body>
+    <div class="wrapper" id="app">
+      <!-- Navbar Section -->
+      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <div class="container container">
+          <a class="navbar-brand" href="#">Klasifikasi.</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto navbar-right">
+              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#main">Home</a></li>
+              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#reviews">About</a></li>
+            </ul>
+          </div>
         </div>
-    </nav>
-    <div id="top-content" class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="big-title">Klasifikasi Artikel<br>Berdasarkan Tingkatan Usia Pembaca</div>
-                    <div class="domain-search-holder">
-                        <form id="domain-search">
-                            <input id="domain-text" type="text" name="domain" placeholder="URL to srcap.." />
-                            <span class="inline-button">
-                                <input id="search-btn" type="submit" name="submit" value="Process" />
-                            </span>
-                        </form>
-                    </div>
+      </nav><!-- Navbar End -->
+
+
+      <div id="main" class="main">
+        <div class="hero">
+          <div class="container">
+            <div class="row align-center">
+              <div class="col-md-12 col-lg-5">
+                <div class="hero-content">
+                  <!-- <h5 class="d-none d-sm-block">Trending News</h5> -->
+                  <h2>Klasifikasi artikel berdasarkan tingkatan usia</h2>
+                  <!-- <p>Best in class big data software and analytics services will render your chunks into meaningful data.</p> -->
+                  <div class="form">
+                  <form id="chimp-form" class="subscribe-form" action="assets/php/subscribe.php" method="post" accept-charset="UTF-8" enctype="application/x-www-form-urlencoded" autocomplete="off" novalidate>
+                    <input class="mail" id="chimp-email" type="email" name="email" placeholder="Article URL" autocomplete="off"><input class="submit-button" type="submit" value="Process">
+                  </form>
+                  <div id="response"></div>
                 </div>
-                <div class="col-md-12">
-                    <div class="arrow-button-holder">
-                        <a href="#pricing">
-                            <div class="arrow-icon">
-                                <i class="sphst sphst-arrow-down"></i>
-                            </div>
-                            <div class="button-text">Go to</div>
-                        </a>
-                    </div>
+                  <div class="form-note">
+                    <!-- <p>14-day free trial and no credit card required.</p> -->
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-12 col-lg-6 offset-lg-1">
+                <img class="img-fluid" src="{{ url_for('static', filename='assets/images/documents.svg') }}" alt="Hero">
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-<div id="pricing" class="container-fluid">
-    <div class="container">
-        <div class="row">
+
+
+        <div id="features" class="features">
+          <div class="container-m">
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="features-intro">
+                  <h2>Paste an article here to classify.</h2>
+                  <!-- <p>We’ll Deliver the best stories and ideas on the topics you care about most straight to your
+                  homepage, app, or inbox. </p> -->
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-12">
+                <div class="form">
+                  <form v-on:submit.prevent="postData" id="chimp-form" class="subscribe-form" action="assets/php/subscribe.php" method="post" accept-charset="UTF-8" enctype="application/x-www-form-urlencoded" autocomplete="off" novalidate>
+                    
+                    <textarea class="form-control form-rounded" rows="15" v-model="article"></textarea>
+                    <br>
+                    <center>
+                      <a class="nav-link js-scroll-trigger" href="#services">
+                        <input class="submit-button nav-link js-scroll-trigger" type="submit" value="Process" v-on:click="postData">
+                      </a>
+                    </center>
+                  </form>
+                  <div id="response"></div>
+                </div>
+
+                <!-- <div class="feature-list">
+                  <div class="card-icon">
+                    <div class="card-img">
+                      <img src="assets/icons/p1.png" width="60" alt="Feature">
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <h3>Fluid Layout</h3>
+                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="services" class="ar-ft-single">
+          <div class="container-m">
             <div class="col-md-12">
-                <div class="row-title">Upload file or Paste an article</div>
+              <div class="features-intro">
+                <center>
+                  <h2>Kategori Kelompok Usia</h2>
+                  <u><h2 class="text text-primary">${kelas}</h2></u>
+                </center>
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <!-- haloooo -->
-        </div>
-    </div>
-</div>
-<div id="contact" class="container-fluid">
-    <div class="container" id="app">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="contact-holder">
-                    <div class="row">
-                        <form id="contactform" v-on:submit.prevent="postData">
-                            <div class="form-items-holder">
-                                <div class="col-md-12"><textarea id="message" v-model="article" name="article" placeholder="Paste an article" required></textarea></div>
-                                <div class="ajax-button col-md-12">
-                                   <input id="submit" type="submit" v-on:click="postData" value="Process">
-                                </div>
-                                <div class="col-md-12" id="form-messages"></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <p><b>Score Naive Bayes : ${score}</b></p>
+            <br><br>
+            <div class="ar-feature">
+              <div class="ar-list">
+                <table class="table table bordered">
+                  <thead>
+                    <th>No.</th>
+                    <th>Term</th>
+                    <th>Count</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(value, name, index) in terms">
+                      <td> ${index+1}.</td>
+                      <td> ${name}</td>
+                      <td> ${value}</td>
+                    </tr>
+                  </tbody>
+                </table>
+             </div>
+             <div class="ar-image">
+               <img class="ar-img img-fluid" src="{{ url_for('static', filename='assets/images/docs.svg') }}" width="220" alt="Hero Image">
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-<!-- <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> -->
-<!-- <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
-<!-- <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script> -->
-<!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            article: '',
-            url: '/api/v1/article/'
-        },
-        methods: {
-            postData: async function () {
-                let response = await fetch(this.url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.article)
-                });
 
-                if (response.ok) {
-                    let kelas = await response.json()
-                    console.log(kelas)
-                    swal({
-                      title: `Artikel Termasuk Kategori ${kelas[0].toUpperCase()}`,
-                      text: `Score Naive Bayes = ${kelas[1].toFixed(3)}`,
-                      icon: 'info'
-                    })
 
-                } else {
-                    alert("Maaf, terjadi kesalahan");
+      <!-- Pelican Footer Section -->
+      <div class="footer-sm">
+        <div class="container-m">
+          <div class="row">
+            <div class="col-md-4">
+              <a class="footer-logo" href="#">Muhammad Iqbal Dwi Putra.</a>
+            </div>
+            <div class="col-md-4">
+              <h6>&copy; 2019</h6>
+            </div>
+            <div class="col-md-4">
+              <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Linkedin</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- Scroll To Top -->
+        <div id="back-top" class="bk-top">
+          <div class="bk-top-txt">
+             <a class="back-to-top js-scroll-trigger" href="#main">Up</a>
+          </div>
+        </div>
+       <!-- Scroll To Top Ends-->
+
+      </div> <!-- Main -->
+    </div><!-- Wrapper -->
+
+
+    <!-- Jquery and Js Plugins -->
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery-2.1.1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+    <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            delimiters: ['${', '}'],
+            data: {
+                article: '',
+                kelas: '',
+                score: '',
+                terms: {},
+                url: '/api/v1/article/'
+            },
+            methods: {
+                postData: async function () {
+                    let response = await fetch(this.url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.article)
+                    });
+
+                    if (response.ok) {
+                        let kelas  = await response.json()
+                        this.terms = kelas[2]
+                        this.kelas = kelas[0].toUpperCase()
+                        this.score = kelas[1].toFixed(3)
+                        console.log(JSON.stringify(kelas[2]))
+                        // swal({
+                        //   title: `Artikel Termasuk Kategori ${kelas[0].toUpperCase()}`,
+                        //   text: `Score Naive Bayes = ${kelas[1].toFixed(3)}`,
+                        //   icon: 'info'
+                        // })
+
+                    } else {
+                        alert("Maaf, terjadi kesalahan");
+                    }
                 }
             }
-        }
-    })
-</script>
-</body>
+        })
+    </script>
+  </body>
 </html>

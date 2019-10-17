@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<title>Klasifikasi Artikel</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slick.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<div id="header-holder">
+    <div class="bottom-gradiant"></div>
+    <nav id="main-nav" class="navbar navbar-default navbar-full">
+        <div class="container-fluid">
+            <div class="container container-nav">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a href="index.html">
+                                <img class="logo" src="{{ url_for('static', filename='images/logo.svg') }}" alt="Spacehost">
+                            </a>
+                        </div>
+                        <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse" id="bs">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#features"><span>Train</span></a></li>
+                                <li><a href="#pricing"><span>About</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="top-content" class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="big-title">Klasifikasi Artikel<br>Berdasarkan Tingkatan Usia Pembaca</div>
+                    <div class="domain-search-holder">
+                        <form id="domain-search">
+                            <input id="domain-text" type="text" name="domain" placeholder="URL to srcap.." />
+                            <span class="inline-button">
+                                <input id="search-btn" type="submit" name="submit" value="Process" />
+                            </span>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="arrow-button-holder">
+                        <a href="#pricing">
+                            <div class="arrow-icon">
+                                <i class="sphst sphst-arrow-down"></i>
+                            </div>
+                            <div class="button-text">Go to</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pricing" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row-title">Upload file or Paste an article</div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- haloooo -->
+        </div>
+    </div>
+</div>
+<div id="contact" class="container-fluid">
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact-holder">
+                    <div class="row">
+                        <form id="contactform" v-on:submit.prevent="postData">
+                            <div class="form-items-holder">
+                                <div class="col-md-12"><textarea id="message" v-model="article" name="article" placeholder="Paste an article" required></textarea></div>
+                                <div class="ajax-button col-md-12">
+                                   <input id="submit" type="submit" v-on:click="postData" value="Process">
+                                </div>
+                                <div class="col-md-12" id="form-messages"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            article: '',
+            url: '/api/v1/article/'
+        },
+        methods: {
+            postData: async function () {
+                let response = await fetch(this.url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.article)
+                });
+
+                if (response.ok) {
+                    let kelas = await response.json()
+                    console.log(kelas)
+                    swal({
+                      title: `Artikel Termasuk Kategori ${kelas[0].toUpperCase()}`,
+                      text: `Score Naive Bayes = ${kelas[1].toFixed(3)}`,
+                      icon: 'info'
+                    })
+
+                } else {
+                    alert("Maaf, terjadi kesalahan");
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
