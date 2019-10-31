@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, jsonify
 import re
 import math
@@ -7,8 +8,11 @@ import random
 from nltk import tokenize
 from stopword_list import stopword_list
 from collections import Counter
+from bs4 import BeautifulSoup
+import requests
+import re
 
-nltk.download('punkt')
+# nltk.download('punkt')
 
 app = Flask(__name__)
 
@@ -25,6 +29,23 @@ def process_api():
 		kelas = classify(article)
 
 	return jsonify(kelas)
+
+@app.route('/api/v1/scrape/', methods=['POST'])
+def scrape_api():
+    kelas = []
+
+    if request.method == 'POST':
+        url_scrap = request.get_json(silent=True)
+        content = requests.get(url_scrap)
+        soup = BeautifulSoup(content.text, 'html.parser')
+        soup.find_all(['p','b','div', 'h1'])
+        for script in soup(["footer", "nav", "aside", "header", "ins", "style", "script", "a", "h2", "h3", "h4", "h5"]):
+            script.decompose()
+        string = soup.get_text()
+        article = re.sub(r'("([^"]|"")*")', '', string)
+        kelas = classify(article)
+
+    return jsonify(kelas)
 
 
 def classify(document):
